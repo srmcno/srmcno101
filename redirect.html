@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Redirecting...</title>
+<script type="text/javascript">
+    function redirect() {
+        // --- This is the base Teams deep link for your app ---
+        var teamsUrl = "https://teams.microsoft.com/l/entity/a6b63365-31a4-4f43-92ec-710b71557af9/9bf91a8e-c798-4b76-b559-57047ddb2926";
+
+        // --- This gets the Vehicle ID from the URL ---
+        var params = new URLSearchParams(window.location.search);
+        var vehicleId = params.get("vehicleId");
+
+        // --- If a vehicleId exists, build the final URL and redirect ---
+        if (vehicleId) {
+            var context = { subEntityId: vehicleId };
+            var finalUrl = teamsUrl + "?context=" + encodeURIComponent(JSON.stringify(context));
+            window.location.replace(finalUrl);
+        } else {
+            // If no vehicleId is found, just go to the app's main page
+            window.location.replace(teamsUrl);
+        }
+    }
+</script>
+</head>
+<body onload="redirect()">
+    <p>Please wait, redirecting to the app...</p>
+</body>
+</html>
